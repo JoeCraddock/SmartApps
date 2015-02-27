@@ -1,17 +1,5 @@
 /**
  *  Slightly Smarter Night Light
- *
- *  Copyright 2015 Joe Craddock
- *
- *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- *  in compliance with the License. You may obtain a copy of the License at:
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
- *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
- *  for the specific language governing permissions and limitations under the License.
- *
  */
 definition(
     name: "Slightly Smarter Night Light",
@@ -63,10 +51,10 @@ def motionHandler(evt) {
 		for (dimmer in dimmers) {
             if (dimmer.currentSwitch == "off") {
                 dimmer.setLevel(level)
-				state.lastStatus = "active"
-				log.debug "motion detected, light is off, turning light on"
+		state.lastStatus = "active"
+		log.debug "motion detected, light is off, turning light on"
             } else {
-				log.debug "motion detected, light is on, doing nothing"
+		log.debug "motion detected, light is on, doing nothing"
             }
         }
 	}
@@ -78,13 +66,13 @@ def motionHandler(evt) {
 
 def inactiveHandler() {
     if (state.lastStatus == "inactive") {
-		// check each dimmer to see if the level has been changed. if it has, don't turn it off
+	// check each dimmer to see if the level has been changed. if it has, don't turn it off
         for (dimmer in dimmers) {
             if (dimmer.currentLevel == level) {
                 dimmer.off()
-				log.debug "no motion, turning light off"
+		log.debug "no motion, turning light off"
             } else {
-				log.debug "no motion, but leaving the light on because someone changed the dim level"
+		log.debug "no motion, but leaving the light on because someone changed the dim level"
             }
         }
     }
